@@ -1,0 +1,13 @@
+name: Daily Task
+on:
+  schedule:
+    - cron: '0 8 * * *'  # Запуск в 08:00 UTC (11:00 МСК)
+jobs:
+  run-n8n:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: docker://n8nio/n8n
+        env:
+          N8N_API_KEY: ${{ secrets.N8N_API_KEY }}
+        with:
+          args: execute --id=WORKFLOW_ID
